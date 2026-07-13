@@ -1,4 +1,4 @@
-create_env_file_if_missing() (
+create_missing_env_file() (
     if [[ -f .env ]]; then
         return
     fi
@@ -15,7 +15,6 @@ create_env_file_if_missing() (
     exit 1
 )
 
-exit_if_env_vars_are_empty() (
+validate_env_values() (
     echo "here"
 )
-

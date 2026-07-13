@@ -3,11 +3,11 @@
 source lib/env.sh
 source lib/files.sh
 
-create_env_file_if_missing
+create_missing_env_file
 
 source .env
 
-exit_if_env_vars_are_empty
+validate_env_values
 
 copy_files_from_remote
 cleanup_old_local_files

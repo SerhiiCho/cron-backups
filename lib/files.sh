@@ -11,6 +11,17 @@ copy_files_from_remote() (
 )
 
 cleanup_old_local_files() (
-    printf "🐧 Deleting log files older than %d days\n"
-    find logs -type f -mtime +20 ! -name '.gitignore'
+    printf "🐧 Deleting log files older than %d days\n" "$LOG_RETENTION_DAYS"
+    find logs \
+        -type f \
+        -mtime +"$LOG_RETENTION_DAYS" ! \
+        -name '.gitignore' \
+        -exec rm -f {} +
+
+    printf "🐧 Deleting backup files older than %d days\n" "$BACKUPS_RETENTION_DAYS"
+    find logs \
+        -type f \
+        -mtime +"$BACKUPS_RETENTION_DAYS" ! \
+        -name '.gitignore' \
+        -exec rm -f {} +
 )
