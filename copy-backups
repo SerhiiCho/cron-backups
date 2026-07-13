@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+source lib/funcs.sh
+
+create_env_file
+
+source .env
+
+copy_files
+delete_old_files
