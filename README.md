@@ -26,3 +26,7 @@ Run the script to start the copying process.
 ```bash
 ./main
 ```
+
+## License
+
+The Cron Backups project is licensed under the [MIT License](https://github.com/SerhiiCho/cron-backups/blob/master/LICENSE)
