@@ -8,3 +8,11 @@ It's build to be configurable with .env file to match everyone's needs.
 
 - Bash
 - Linux
+
+## Get Started
+
+Create .env file and fill it in with your values.
+
+```bash
+cp .env.example .env
+```
