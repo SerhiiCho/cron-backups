@@ -1,8 +1,9 @@
-create_missing_env_file() (
+create_missing_env_file() {
     if [[ -f .env ]]; then
         return
     fi
 
+    local answer
     read -r "❓ You need .env file to run this script. Do you want to create it? Y/n" answer
 
     if [[ "${answer,,}" == "n" ]]; then
@@ -10,11 +11,11 @@ create_missing_env_file() (
     fi
 
     cp .env.example .env
-    echo "🐧 .env file is created, fill in the variables values"
+    log "🐧 .env file is created. Fill the values"
 
     exit 1
-)
+}
 
-validate_env_values() (
+validate_env_values() {
     echo "here"
-)
+}
