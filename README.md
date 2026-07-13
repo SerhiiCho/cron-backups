@@ -11,8 +11,18 @@ It's build to be configurable with .env file to match everyone's needs.
 
 ## Get Started
 
+### 1. Create .env file
+
 Create .env file and fill it in with your values.
 
 ```bash
 cp .env.example .env
+```
+
+### 2. Run the script
+
+Run the script to start the copying process.
+
+```bash
+./main
 ```
