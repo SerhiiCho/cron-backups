@@ -1,29 +1,22 @@
-log_file="logs/$(date '+%Y-%m-%d.log')"
-
-log() {
-    local level="${2:-INFO}"
-    echo "[$(date +'%Y-%m-%d %H:%M:%S')] [$level] $1" >> "$log_file"
-}
-
 copy_files_from_remote() {
-    log "🐧 Copying SQL backups..."
+    log "Copying SQL backups..."
     rsync -avz --timeout=30 "$REMOTE_VPS_HOST":"$SQL_BACKUPS_FROM_PATH" \
-        backups >> "$log_file" 2>&1
+        backups >> "$LOG_FILE" 2>&1
 
-    log "🐧 Copying storage files..."
+    log "Copying storage files..."
     rsync -avz --timeout=30 "$REMOTE_VPS_HOST":"$STORAGE_BACKUPS_FROM_PATH" \
-        storage >> "$log_file" 2>&1
+        storage >> "$LOG_FILE" 2>&1
 }
 
 cleanup_old_local_files() {
-    log "🐧 Deleting log files older than $LOG_RETENTION_DAYS days..."
+    log "Deleting log files older than $LOG_RETENTION_DAYS days..."
     find logs \
         -type f \
         -mtime +"$LOG_RETENTION_DAYS" ! \
         -name '.gitignore' \
         -exec rm -f {} +
 
-    log "🐧 Deleting backup files older than $BACKUPS_RETENTION_DAYS days..."
+    log "Deleting backup files older than $BACKUPS_RETENTION_DAYS days..."
     find logs \
         -type f \
         -mtime +"$BACKUPS_RETENTION_DAYS" ! \

@@ -4,6 +4,8 @@ source lib/utils.sh
 source lib/env.sh
 source lib/files.sh
 
+log "=========== Starting the script... ==========="
+
 create_missing_env_file
 
 source .env
@@ -12,3 +14,5 @@ validate_env_values
 
 copy_files_from_remote
 cleanup_old_local_files
+
+log "============ The script is ended! ============"
