@@ -1,4 +1,9 @@
 LOG_FILE="logs/$(date '+%Y-%m-%d.log')"
+SHOW_LOG=1
+
+if [[ "$1" == "--silent" ]]; then
+    SHOW_LOG=0
+fi
 
 log() {
     local level="${2:-INFO}"
@@ -9,7 +14,13 @@ log() {
         emo="❌"
     fi
 
-    echo "[$(date +'%Y-%m-%d %H:%M:%S')] [$level] $emo $1" >> "$LOG_FILE"
+    output="[$(date +'%Y-%m-%d %H:%M:%S')] [$level] $emo  $1"
+
+    if [[ "$SHOW_LOG" -eq 1 ]]; then
+        echo "$output"
+    else
+        echo "$output" >> "$LOG_FILE"
+    fi
 }
 
 is_number() {

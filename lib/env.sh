@@ -4,7 +4,7 @@ create_missing_env_file() {
     fi
 
     local answer
-    read -rp "❓ You need .env file to run this script. Do you want to create it? Y/n" answer
+    read -rp "❓ You need .env file to run this script. Do you want to create it? Y/n " answer
 
     if [[ "${answer,,}" == "n" ]]; then
         exit 1
@@ -51,6 +51,4 @@ validate_env_values() {
         log "BACKUPS_RETENTION_DAYS env variable should be a number" "error"
         exit 1
     fi
-
-    echo "here"
 }
