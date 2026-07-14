@@ -8,7 +8,7 @@ It's build to be configurable with `.env` file to match everyone's needs.
 
 The original idea was to save up on money by not paying VPS providers extra money for daily backups and do them on my own using an old laptop.
 
-If you have an old computer laying around without doing anything, like it happened in my case. You can just utilise it run it as a backup service for your VPS. Just run it as a cron job with something like `0 0,12 * * * /home/user/cron-backup/main` to backup your data at every 12 hours and it will handle the rest.
+If you have an old computer laying around without doing anything, like it happened in my case. You can just utilise it run it as a backup service for your VPS. Just run it as a cron job with something like `0 0,12 * * * /home/user/cron-backup/main --silent` to backup your data at every 12 hours and it will handle the rest.
 
 ## Requirements
 
@@ -32,6 +32,13 @@ Run the script to start the copying process.
 ```bash
 ./main
 ```
+
+## Flags (Arguments)
+
+| Full       | Short | Description                                     |
+| ---------- | ----- | ----------------------------------------------- |
+| `--help`   | `-h`  | Show help message                               |
+| `--silent` | `-s`  | Redirect output to a log file instead of stdout |
 
 ## Notes
 

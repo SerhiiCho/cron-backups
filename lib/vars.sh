@@ -1,0 +1,16 @@
+SHOW_LOG=1
+
+LOG_FILE="logs/$(date '+%Y-%m-%d.log')"
+
+HELP_MESSAGE=$(cat <<EOF
+Usage: ls [OPTION]...
+Bash program that is meant to run as a cron job on an old machine or Raspberry
+Pi for copying production data from VPS and storing them.
+
+Options:
+  -h, --help
+         show this help message.
+  -s, --silent
+         do not show write into stdin, save the output into a log file.
+EOF
+)

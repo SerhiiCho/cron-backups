@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 
-source lib/utils.sh
+source lib/vars.sh
+source lib/funcs.sh
+
+handle_argument_flags "$@"
+
 source lib/env.sh
 source lib/files.sh
 

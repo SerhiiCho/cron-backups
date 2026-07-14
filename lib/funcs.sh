@@ -1,9 +1,14 @@
-LOG_FILE="logs/$(date '+%Y-%m-%d.log')"
-SHOW_LOG=1
-
-if [[ "$1" == "--silent" ]]; then
-    SHOW_LOG=0
-fi
+handle_argument_flags() {
+    case "$1" in
+        --silent|-s)
+            SHOW_LOG=0
+            ;;
+        --help|-h)
+            echo "$HELP_MESSAGE"
+            exit 1
+            ;;
+    esac
+}
 
 log() {
     local level="${2:-INFO}"
