@@ -4,7 +4,7 @@ create_missing_env_file() {
     fi
 
     local answer
-    read -r "❓ You need .env file to run this script. Do you want to create it? Y/n" answer
+    read -rp "❓ You need .env file to run this script. Do you want to create it? Y/n" answer
 
     if [[ "${answer,,}" == "n" ]]; then
         exit 1
