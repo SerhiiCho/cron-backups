@@ -8,8 +8,7 @@ copy_files_from_remote() {
         local to
         to=$(awk -F: '{ print $2 }' <<< "$item")
 
-        # Add trailing slash to $from
-        [[ "$from" != */ ]] && from="$from/"
+        [[ ! -f "$to" ]] && mkdir -p "$to"
 
         log "Copying files from $from to $to"
 
