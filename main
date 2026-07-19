@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 
-source lib/vars.sh
-source lib/funcs.sh
+source lib/vars
+source lib/funcs
 
 handle_argument_flags "$@"
 
-source lib/env.sh
-source lib/files.sh
+source lib/env
+source lib/files
 
 log "=========== Starting the script... ==========="
 

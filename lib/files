@@ -1,0 +1,83 @@
+#!/usr/bin/env bash
+
+copy_files_from_remote() {
+    for item in "${BACKUP_PATHS[@]}"; do
+        local from
+        from=$(awk -F: '{ print $1 }' <<< "$item")
+
+        local to
+        to=$(awk -F: '{ print $2 }' <<< "$item")
+
+        # Add trailing slash to $from
+        [[ "$from" != */ ]] && from="$from/"
+
+        log "Copying files from $from to $to"
+
+        rsync -avz --timeout=30 "$REMOTE_VPS_HOST":"$from" "$to" >> "$LOG_FILE" 2>&1
+    done
+}
+
+get_retention_value_from_args() {
+    local args
+    IFS=',' read -r -a args <<< "$1"
+
+    for arg in "${args[@]}"; do
+        local key
+        key=$(awk -F= '{ print $1 }' <<< "$arg")
+
+        [[ "$key" != "retention" ]] && continue
+
+        local val
+        val=$(awk -F= '{ print $2 }' <<< "$arg")
+
+        echo "$val"
+        break
+    done
+}
+
+cleanup_backups() {
+    for item in "${BACKUP_PATHS[@]}"; do
+        local to
+        to=$(awk -F: '{ print $2 }' <<< "$item")
+
+        local args
+        args=$(awk -F: '{ print $3 }' <<< "$item")
+
+        retention=$(get_retention_value_from_args "$args")
+
+        [[ "$retention" == "" ]] && continue
+
+        local files
+        files=$(find "$to" -type f -mtime +"$retention" ! -name '.gitignore')
+
+        if [[ "$files" == "" ]]; then
+            log "No outdated backup files to delete. Skipping..."
+            continue
+        fi
+
+        log "Deleting files in $to older than $retention days:"
+        log "$files"
+
+        echo "$files" | xargs rm -f
+    done
+}
+
+cleanup_logs() {
+    local files
+    files=$(find logs -type f -mtime +"$LOG_RETENTION_DAYS" ! -name '.gitignore')
+    
+    if [[ "$files" == "" ]]; then
+        log "No outdated log files to delete. Skipping..."
+        return
+    fi
+
+    log "Deleting log files older than $LOG_RETENTION_DAYS days:"
+    log "$files"
+
+    echo "$files" | xargs rm -f
+}
+
+cleanup_old_local_files() {
+    cleanup_logs
+    cleanup_backups
+}

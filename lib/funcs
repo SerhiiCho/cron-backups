@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 handle_argument_flags() {
     case "$1" in
         --silent|-s)
