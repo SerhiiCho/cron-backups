@@ -13,7 +13,7 @@ If you have an old computer laying around without doing anything, like it happen
 ## Requirements
 
 - Bash
-- Linux
+- Rsync
 
 ## Get Started
 

@@ -2,7 +2,7 @@
 
 SHOW_LOG=1
 
-LOG_FILE="logs/$(date '+%Y-%m-%d.log')"
+LOG_FILE="logs/$(date '+%Y-%m-%d').log"
 
 HELP_MESSAGE=$(cat <<EOF
 Usage: ls [OPTION]...
