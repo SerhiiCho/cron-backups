@@ -42,7 +42,7 @@ Run the script to start the copying process.
 
 ## Notes
 
-- When you SSH into your VPS, you should see any printed text as it will mess with `rsync` command tryting to sync files. The easiest way is to create an empty `.lesshst` file in your home directory which will remove all the login output.
+- When you SSH into your VPS, you should see any printed text as it will mess with `rsync` command tryting to sync files. The easiest way is to create an empty `.hushlogin` file in your home directory `touch ~/.hushlogin`  which will remove all the login output.
 - This script doesn't remove storage and backup files from your system if they are missing on VPS. If executed this script and then deleted some files on VPS, this script will still keep those deleted files on your host machine even though they are missing on VPS.
 
 ## License
