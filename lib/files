@@ -12,7 +12,11 @@ copy_files_from_remote() {
 
         log "Copying files from $from to $to"
 
-        rsync -avz --timeout=30 "$REMOTE_VPS_HOST":"$from" "$to" >> "$LOG_FILE" 2>&1
+        rsync \
+            -e 'ssh -o StrictHostKeyCheking=no' \
+            -avz \
+            --timeout=30 \
+            "$REMOTE_VPS_HOST":"$from" "$to" >> "$LOG_FILE" 2>&1
     done
 }
 
